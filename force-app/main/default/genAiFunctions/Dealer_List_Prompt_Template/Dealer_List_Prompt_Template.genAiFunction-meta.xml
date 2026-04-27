@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Action get the List of dealer matching zipcode and Vehicle Model.</description>
+    <developerName>Dealer_List_Prompt_Template</developerName>
+    <invocationTarget>Dealer_List_Prompt_Template</invocationTarget>
+    <invocationTargetType>generatePromptResponse</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Dealer_List_Prompt_Template</localDeveloperName>
+    <masterLabel>Dealer List Prompt Template</masterLabel>
+    <progressIndicatorMessage>Fetching Dealers</progressIndicatorMessage>
+</GenAiFunction>

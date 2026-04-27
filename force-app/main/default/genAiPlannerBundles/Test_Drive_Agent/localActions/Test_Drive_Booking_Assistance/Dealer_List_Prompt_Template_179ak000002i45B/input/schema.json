@@ -1,0 +1,22 @@
+{
+  "required" : [ "Input:zipcode", "Input:vehicleName" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "Input:zipcode" : {
+      "title" : "zipcode",
+      "description" : "Zip code in text format",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "Input:vehicleName" : {
+      "title" : "vehicleName",
+      "description" : "Vehicle Name in text format",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

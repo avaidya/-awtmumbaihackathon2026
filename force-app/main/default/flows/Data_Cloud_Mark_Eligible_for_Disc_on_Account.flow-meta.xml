@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Data Cloud Triggered flow to Mark Eligible for Disc to True on Account</description>
+    <environments>Default</environments>
+    <interviewLabel>Data Cloud: Mark Eligible for Disc on Account {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Data Cloud: Mark Eligible for Disc on Account</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Customer_Account</name>
+        <label>Update Customer (Account)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.individual_id__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Eligible_for_Discount__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Customer_Account</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>vehicle_count__c</field>
+            <operator>GreaterThan</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </filters>
+        <object>eligible_for_disc_calc_insight__cio</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>DataCloudDataChange</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

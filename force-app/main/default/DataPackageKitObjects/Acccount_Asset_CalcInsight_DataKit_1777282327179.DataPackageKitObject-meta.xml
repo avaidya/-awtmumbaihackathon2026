@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataPackageKitObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Acccount_Asset_CalcInsight_DataKit</masterLabel>
+    <parentDataPackageKitDefinitionName>Acccount_Asset_CalcInsight_DataKit</parentDataPackageKitDefinitionName>
+    <referenceObjectName>ssot_Asset_Person_Account_map_ssot_Individual_ssot_Id_1776417716759</referenceObjectName>
+    <referenceObjectType>FieldSrcTrgtRelationship</referenceObjectType>
+</DataPackageKitObject>

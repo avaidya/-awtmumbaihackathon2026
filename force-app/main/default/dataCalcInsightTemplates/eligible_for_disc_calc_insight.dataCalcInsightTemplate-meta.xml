@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCalcInsightTemplate xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <builderExpression xsi:nil="true"/>
+    <creationType>Custom</creationType>
+    <dataspaceName>default</dataspaceName>
+    <dataspacePrefix xsi:nil="true"/>
+    <definitionType>CALCULATED_METRIC</definitionType>
+    <description>Calculated insight to check if customer is eligible for discount</description>
+    <developerName>eligible_for_disc_calc_insight</developerName>
+    <expression>SELECT COUNT(ssot__Asset__dlm.ssot__Id__c) AS vehicle_count__c,  ssot__Individual__dlm.ssot__Id__c AS individual_id__c FROM ssot__Asset__dlm JOIN ssot__Individual__dlm ON (ssot__Asset__dlm.Person_Account__c = ssot__Individual__dlm.ssot__Id__c AND ssot__Asset__dlm.KQ_Person_Account__c = ssot__Individual__dlm.KQ_Id__c) JOIN IndividualIdentityLink__dlm ON (ssot__Individual__dlm.ssot__Id__c = IndividualIdentityLink__dlm.SourceRecordId__c AND ssot__Individual__dlm.KQ_Id__c = IndividualIdentityLink__dlm.KQ_SourceRecordId__c) JOIN UnifiedIndividual__dlm ON (IndividualIdentityLink__dlm.UnifiedRecordId__c = UnifiedIndividual__dlm.ssot__Id__c) WHERE ( ssot__Individual__dlm.Is_Person_Account__c = &apos;true&apos; AND (ssot__Asset__dlm.ssot__Name__c contains &apos;Tata&apos;) AND DATEDIFF(NOW(),ssot__Asset__dlm.ssot__PurchaseDate__c) &gt; 760)  GROUP BY individual_id__c</expression>
+    <masterLabel>eligible for disc calc insight</masterLabel>
+    <scheduleEndDate>2026-06-30</scheduleEndDate>
+    <scheduleInterval>1</scheduleInterval>
+    <scheduleStartDateTime>2026-04-20T11:30:00.000Z</scheduleStartDateTime>
+    <sourceObjectDevName>eligible_for_disc_calc_insight</sourceObjectDevName>
+    <templateVersion>1</templateVersion>
+</DataCalcInsightTemplate>

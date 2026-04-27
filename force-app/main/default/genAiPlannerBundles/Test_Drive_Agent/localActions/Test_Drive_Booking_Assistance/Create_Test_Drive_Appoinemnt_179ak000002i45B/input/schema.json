@@ -1,0 +1,35 @@
+{
+  "required" : [ "leadId", "scheduledEndTime", "scheduledstartTime", "vehicleModel" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "leadId" : {
+      "title" : "leadId",
+      "description" : "Store the Lead Record ID",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "scheduledEndTime" : {
+      "title" : "scheduledEndTime",
+      "description" : "Scheduled End Date Time for Test Drive",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "scheduledstartTime" : {
+      "title" : "scheduledstartTime",
+      "description" : "Scheduled Start Date Time for Test Drive",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "vehicleModel" : {
+      "title" : "vehicleModel",
+      "description" : "Name of the Vehicle Model",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,28 @@
+{
+  "required" : [ "dealerName", "preferedTime", "vehicleName" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "dealerName" : {
+      "title" : "dealerName",
+      "description" : "Dealer name for with which the Test Ride is to be Scheduled",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "preferedTime" : {
+      "title" : "preferedTime",
+      "description" : "Preferred time of the user for Test Ride. ",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "vehicleName" : {
+      "title" : "vehicleName",
+      "description" : "Vehicle name for which Test Ride is to be Scheduled",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

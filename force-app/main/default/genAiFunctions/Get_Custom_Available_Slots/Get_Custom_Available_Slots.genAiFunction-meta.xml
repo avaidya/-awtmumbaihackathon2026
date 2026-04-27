@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Get Available Time Slots for Test Drive Appointment</description>
+    <developerName>Get_Custom_Available_Slots</developerName>
+    <invocationTarget>CustomSlotCalculator</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Custom_Available_Slots</localDeveloperName>
+    <masterLabel>Get Custom Available Slots</masterLabel>
+    <progressIndicatorMessage>Getting Available Slots</progressIndicatorMessage>
+</GenAiFunction>

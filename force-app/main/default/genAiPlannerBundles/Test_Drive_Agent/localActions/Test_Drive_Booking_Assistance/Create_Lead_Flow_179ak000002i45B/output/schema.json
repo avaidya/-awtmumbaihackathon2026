@@ -1,0 +1,24 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "eligibleForDiscount" : {
+      "title" : "eligibleForDiscount",
+      "description" : "Field indicating if customer is eligible for discount",
+      "lightning:type" : "lightning__booleanType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    },
+    "leadId" : {
+      "title" : "leadId",
+      "description" : "Id of the Lead Record",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

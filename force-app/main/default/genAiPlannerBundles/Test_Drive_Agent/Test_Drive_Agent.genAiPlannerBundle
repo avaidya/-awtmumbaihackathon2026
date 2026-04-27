@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <attributeMappings>
+        <attributeName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF.Create_Test_Drive_Appoinemnt_179ak000002i45B.input_leadId</attributeName>
+        <attributeType>CustomPluginFunctionAttribute</attributeType>
+        <mappingTargetName>Lead_Id</mappingTargetName>
+        <mappingType>Variable</mappingType>
+    </attributeMappings>
+    <attributeMappings>
+        <attributeName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF.Create_Lead_Flow_179ak000002i45B.input_messagingUserId</attributeName>
+        <attributeType>CustomPluginFunctionAttribute</attributeType>
+        <mappingTargetName>EndUserId</mappingTargetName>
+        <mappingType>ContextVariable</mappingType>
+    </attributeMappings>
+    <attributeMappings>
+        <attributeName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF.Create_Lead_Flow_179ak000002i45B.output_leadId</attributeName>
+        <attributeType>CustomPluginFunctionAttribute</attributeType>
+        <mappingTargetName>Lead_Id</mappingTargetName>
+        <mappingType>Variable</mappingType>
+    </attributeMappings>
+    <attributeMappings>
+        <attributeName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF.Create_Lead_Flow_179ak000002i45B.output_eligibleForDiscount</attributeName>
+        <attributeType>CustomPluginFunctionAttribute</attributeType>
+        <mappingTargetName>Eligible_for_Discount</mappingTargetName>
+        <mappingType>Variable</mappingType>
+    </attributeMappings>
+    <description>You are an AI Agent whose job is to help customers of Electra Cars book test drives, collect lead information, recommend vehicles, and manage related tasks seamlessly.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jak000001hJtF</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic when a user wants to book, schedule, get available timeslots or inquire about a vehicle test drive.</description>
+        <developerName>p_16jak000001hJtF_Test_Drive_Booking_Assistance_16jak000001hJtF</developerName>
+        <genAiPluginInstructions>
+            <description>Once user asks the first message ask them to confirm their phone number before proceeding. Once provided with phone number call the &apos;Create Lead Flow&apos; to create Lead Record. Do not let the user know the technical details</description>
+            <developerName>instructions_0_1775823516551</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1775823516551</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Greet the user warmly. Ask for their preferred vehicle model and desired date and time for the test drive.</description>
+            <developerName>instructions_0_1775842365484</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1775842365484</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Ask for the user&apos;s zipcode. Use this zipcode and vehicle model to trigger the &apos;Dealer List Prompt Template&apos; action.</description>
+            <developerName>instructions_1_1775842365489</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_1_1775842365489</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>if the Eligible for Discount context variable is true, introduce a special Tata loyalty discount saying &apos;Since you’ve been driving a Tata vehicle for a while, you’re eligible for an exclusive upgrade benefit 🎉&apos;</description>
+            <developerName>instructions_2_1775842365489</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_2_1775842365489</masterLabel>
+            <sortOrder>3</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Once dealers are found, present the list to the user and ask them to select their preferred location.</description>
+            <developerName>instructions_3_1775842365489</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_3_1775842365489</masterLabel>
+            <sortOrder>4</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>After a dealer is selected, summarize the details (Model, Date/Time, Dealer) .Once the user happy with the summary ask the user if they want to get the available time slot for the preferred Date if yes call &apos;Get Custom Available Slots&apos; action to get the available time slots</description>
+            <developerName>instructions_0_1776172669858</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1776172669858</masterLabel>
+            <sortOrder>5</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If no dealers are found in that zipcode, ask for an alternative nearby zipcode or offer to escalate to a live agent.</description>
+            <developerName>instructions_0_1776337447595</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1776337447595</masterLabel>
+            <sortOrder>6</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Once user confirms the dealer and the appointment slot call the &apos;Create Test Drive Appointment&apos; action to create the Test Drive Record. Always send the DateTime in IST Timezone</description>
+            <developerName>instructions_0_1776789737547</developerName>
+            <language>en_US</language>
+            <masterLabel>instructions_0_1776789737547</masterLabel>
+            <sortOrder>7</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>Get_Custom_Available_Slots_179ak000002i45B</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Dealer_List_Prompt_Template_179ak000002i45B</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Create_Test_Drive_Appoinemnt_179ak000002i45B</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Create_Lead_Flow_179ak000002i45B</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Dealer_List_Prompt_Template_179ak000002i45B</fullName>
+            <description>Action get the List of dealer matching zipcode and Vehicle Model.</description>
+            <developerName>Dealer_List_Prompt_Template_179ak000002i45B</developerName>
+            <invocationTarget>Dealer_List_Prompt_Template</invocationTarget>
+            <invocationTargetType>generatePromptResponse</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Dealer_List_Prompt_Template</localDeveloperName>
+            <masterLabel>Dealer List Prompt Template</masterLabel>
+            <progressIndicatorMessage>Fetching Dealers</progressIndicatorMessage>
+            <source>Dealer_List_Prompt_Template</source>
+        </localActions>
+        <localActions>
+            <fullName>Create_Lead_Flow_179ak000002i45B</fullName>
+            <description>Flow to create Lead if not already present in salesforce</description>
+            <developerName>Create_Lead_Flow_179ak000002i45B</developerName>
+            <invocationTarget>Create_Lead_Flow</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Create_Lead_Flow</localDeveloperName>
+            <mappingAttributes>
+                <label>messagingUserId</label>
+                <name>input_messagingUserId</name>
+                <parameterName>messagingUserId</parameterName>
+                <parameterType>input</parameterType>
+            </mappingAttributes>
+            <mappingAttributes>
+                <label>eligibleForDiscount</label>
+                <name>output_eligibleForDiscount</name>
+                <parameterName>eligibleForDiscount</parameterName>
+                <parameterType>output</parameterType>
+            </mappingAttributes>
+            <mappingAttributes>
+                <label>leadId</label>
+                <name>output_leadId</name>
+                <parameterName>leadId</parameterName>
+                <parameterType>output</parameterType>
+            </mappingAttributes>
+            <masterLabel>Create Lead Flow</masterLabel>
+        </localActions>
+        <localActions>
+            <fullName>Get_Custom_Available_Slots_179ak000002i45B</fullName>
+            <description>Get Available Time Slots for Test Drive Appointment</description>
+            <developerName>Get_Custom_Available_Slots_179ak000002i45B</developerName>
+            <invocationTarget>CustomSlotCalculator</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Get_Custom_Available_Slots</localDeveloperName>
+            <masterLabel>Get Custom Available Slots</masterLabel>
+            <progressIndicatorMessage>Getting Available Slots</progressIndicatorMessage>
+            <source>Get_Custom_Available_Slots</source>
+        </localActions>
+        <localActions>
+            <fullName>Create_Test_Drive_Appoinemnt_179ak000002i45B</fullName>
+            <description>Flow to create Service Appointment Record for Test Drive</description>
+            <developerName>Create_Test_Drive_Appoinemnt_179ak000002i45B</developerName>
+            <invocationTarget>Create_Test_Drive_Appoinemnt</invocationTarget>
+            <invocationTargetType>flow</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Create_Test_Drive_Appoinemnt</localDeveloperName>
+            <mappingAttributes>
+                <label>leadId</label>
+                <name>input_leadId</name>
+                <parameterName>leadId</parameterName>
+                <parameterType>input</parameterType>
+            </mappingAttributes>
+            <masterLabel>Create Test Drive Appoinemnt</masterLabel>
+            <progressIndicatorMessage>Creating Test Drive Appointment</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>p_16jak000001hJtF_Test_Drive_Booking_Assistance</localDeveloperName>
+        <masterLabel>Test Drive Booking Assistance</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>The agent can collect vehicle models, search for nearby dealers by zipcode and vehicleName, get available timeslots and schedule appointments. It cannot provide financing quotes or negotiate trade-in values.</scope>
+    </localTopics>
+    <masterLabel>Test Drive Agent</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jak000001hJtF</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jak000001hJtF</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__CustomerWebClient</surface>
+        <surfaceType>CustomerWebClient</surfaceType>
+    </plannerSurfaces>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__Messaging</surface>
+        <surfaceType>Messaging</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>

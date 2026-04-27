@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Test Drive Queue</name>
+    <queueMembers>
+        <users>
+            <user>epic.dcc5295a5fe1@orgfarm.salesforce.com</user>
+            <user>soham.kasurde@ibm.com</user>
+            <user>test_drive_agent@00dak00000oihly1251160575.ext</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+</Queue>

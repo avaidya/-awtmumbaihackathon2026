@@ -1,0 +1,21 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "output" : {
+      "title" : "output",
+      "description" : "A list of Available Time Slots in Text format. Display bulleted list",
+      "maxItems" : 2000,
+      "items" : {
+        "maxLength" : 100000,
+        "lightning:type" : "lightning__richTextType"
+      },
+      "lightning:type" : "lightning__listType",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

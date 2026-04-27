@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Assignment to assign existing Lead Id to the leadId output field</description>
+        <name>Assign_existing_lead_Id</name>
+        <label>Assign existing lead Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>leadId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Lead.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Customer_by_Phone_Number_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assignment to assign newly created Lead Id to the leadId output field</description>
+        <name>Assign_newly_created_lead_Id</name>
+        <label>Assign newly created lead Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>leadId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>newlyCreatedLeadId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Customer_by_Phone_Number_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Set Eligible For Discount</description>
+        <name>Set_Eligible_For_Discount</name>
+        <label>Set Eligible For Discount</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>eligibleForDiscount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Customer_by_Phone_Number_Account.Eligible_for_Discount__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Decision to check if the lead is present based on the Name &amp; Phone Number</description>
+        <name>Check_if_Lead_is_Present</name>
+        <label>Check if Lead is Present</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Test_Drive_Queue</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Lead_Present</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Lead</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_existing_lead_Id</targetReference>
+            </connector>
+            <label>Lead Present</label>
+        </rules>
+    </decisions>
+    <description>Flow to create Lead if not already present in salesforce</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Formula field to extract the firstname from the Messaging User, Username field</description>
+        <name>firstname</name>
+        <dataType>String</dataType>
+        <expression>TRIM(LEFT({!Get_Messaigng_User.Name}, FIND(&quot; &quot;,{!Get_Messaigng_User.Name}) - 1))</expression>
+    </formulas>
+    <formulas>
+        <description>Formula field to extract lastname from Messaging User, Username field</description>
+        <name>lastname</name>
+        <dataType>String</dataType>
+        <expression>TRIM(RIGHT({!Get_Messaigng_User.Name}, LEN({!Get_Messaigng_User.Name}) - FIND(&quot; &quot;, {!Get_Messaigng_User.Name})))</expression>
+    </formulas>
+    <interviewLabel>Create Lead Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Lead Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Action to create a Lead record with Name &amp; Phone Number. Since the Lead will be created from Agentforce Company to be populated as Test Drive Agent</description>
+        <name>Create_Lead_Record</name>
+        <label>Create Lead Record</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignRecordIdToReference>newlyCreatedLeadId</assignRecordIdToReference>
+        <connector>
+            <targetReference>Assign_newly_created_lead_Id</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Company</field>
+            <value>
+                <stringValue>Test Drive Agent</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FirstName</field>
+            <value>
+                <elementReference>firstname</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastName</field>
+            <value>
+                <elementReference>lastname</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>MobilePhone</field>
+            <value>
+                <elementReference>phoneNumber</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Test_Drive_Queue.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordCreates>
+    <recordLookups>
+        <description>Get Customer by Phone Number (Account)</description>
+        <name>Get_Customer_by_Phone_Number_Account</name>
+        <label>Get Customer by Phone Number (Account)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Eligible_For_Discount</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsPersonAccount</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>PersonMobilePhone</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>phoneNumber</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Eligible_for_Discount__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Action to get existing lead record</description>
+        <name>Get_Lead</name>
+        <label>Get Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_if_Lead_is_Present</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Messaigng_User.Name</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>MobilePhone</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>phoneNumber</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Messaging User Record</description>
+        <name>Get_Messaigng_User</name>
+        <label>Get Messaging User</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Lead</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>messagingUserId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>MessagingEndUser</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Get Test Drive Queue</description>
+        <name>Get_Test_Drive_Queue</name>
+        <label>Get Test Drive Queue (Queue)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Lead_Record</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Test_Drive_Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Messaigng_User</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Field indicating if customer is eligible for discount</description>
+        <name>eligibleForDiscount</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Id of the Lead Record</description>
+        <name>leadId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Id of the Messaging User</description>
+        <name>messagingUserId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>newlyCreatedLeadId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the phone number of the user</description>
+        <name>phoneNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

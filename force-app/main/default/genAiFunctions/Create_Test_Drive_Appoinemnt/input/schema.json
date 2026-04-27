@@ -1,0 +1,28 @@
+{
+  "required" : [ "dealerName", "scheduledEndTime", "scheduledstartTime" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "dealerName" : {
+      "title" : "dealerName",
+      "description" : "Name of the Dealer",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "scheduledEndTime" : {
+      "title" : "scheduledEndTime",
+      "description" : "Scheduled End Date Time for Test Drive",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "scheduledstartTime" : {
+      "title" : "scheduledstartTime",
+      "description" : "Scheduled Start Date Time for Test Drive",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

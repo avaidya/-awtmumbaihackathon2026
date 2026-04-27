@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Available_Appointment_Slots_Action_1</name>
+        <label>Get Available Appointment Slots Action 1</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>getAvailableAppointmentSlots</actionName>
+        <actionType>getAvailableAppointmentSlots</actionType>
+        <connector>
+            <targetReference>Loop_Through_Appointment_Slots</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>workTypeGroup</name>
+            <value>
+                <stringValue>0VSak0000002Eq5GAE</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>serviceTerritory</name>
+            <value>
+                <stringValue>0Hhak000000VnndCAC</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>preferredStartTime</name>
+            <value>
+                <dateTimeValue>2026-04-14T03:30:00.000Z</dateTimeValue>
+            </value>
+        </inputParameters>
+        <nameSegment>getAvailableAppointmentSlots</nameSegment>
+        <offset>0</offset>
+        <outputParameters>
+            <assignToReference>timeSlotIDs</assignToReference>
+            <name>availableAppointmentSlots</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Send_Appointment_Slots_to_Prompt</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Send Appointment Slots to Prompt</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!availableTime}
+</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Appointment_Slots</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>availableTime</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(
+    SUBSTITUTE(
+        LEFT({!Loop_Through_Appointment_Slots}, 19), 
+        &quot;T&quot;, 
+        &quot; &quot;
+    )
+) - (5.5 / 24)</expression>
+    </formulas>
+    <formulas>
+        <name>availableTimeSlot</name>
+        <dataType>Time</dataType>
+        <expression>TIMEVALUE(
+    MID(
+        SUBSTITUTE(SUBSTITUTE({!Loop_Through_Appointment_Slots}, &quot;[&quot;, &quot;&quot;), &quot;]&quot;, &quot;&quot;),
+        FIND(&quot;T&quot;, {!Loop_Through_Appointment_Slots}) + 1,
+        8
+    )
+)</expression>
+    </formulas>
+    <formulas>
+        <name>startTime</name>
+        <dataType>String</dataType>
+        <expression>TRIM(LEFT({!Loop_Through_Appointment_Slots}, FIND(&quot;,&quot;, {!Loop_Through_Appointment_Slots}) - 1))</expression>
+    </formulas>
+    <interviewLabel>Get available time slots {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Get available time slots</label>
+    <loops>
+        <name>Loop_Through_Appointment_Slots</name>
+        <label>Loop Through Appointment Slots</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>timeSlotIDs</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Appointment_Slots_to_Prompt</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Available_Appointment_Slots_Action_1</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>dealerName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>timeSlotIDs</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

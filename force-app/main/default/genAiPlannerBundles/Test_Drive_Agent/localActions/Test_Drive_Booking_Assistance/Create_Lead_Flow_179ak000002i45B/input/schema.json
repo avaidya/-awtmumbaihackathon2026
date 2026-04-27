@@ -1,0 +1,21 @@
+{
+  "required" : [ "messagingUserId", "phoneNumber" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "messagingUserId" : {
+      "title" : "messagingUserId",
+      "description" : "Id of the Messaging User",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "phoneNumber" : {
+      "title" : "phoneNumber",
+      "description" : "Stores the phone number of the user",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

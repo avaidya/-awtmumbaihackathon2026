@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Add all qualifying dealers details to the prompt instructions.</description>
+        <name>Send_Dealers_to_Prompt_Template</name>
+        <elementSubtype>AddPromptInstructions</elementSubtype>
+        <label>Send Dealers to Prompt Template</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Output.Prompt</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>Dealer Name : {!Loop_through_Dealers.Account.Name}
+Dealer Address :{!Loop_through_Dealers.Account.BillingStreet} {!Loop_through_Dealers.Account.BillingCity} {!Loop_through_Dealers.Account.BillingPostalCode}
+</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_through_Dealers</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Check Vehicle Availability</description>
+        <name>Check_Vehicle_Availability</name>
+        <label>Check Vehicle Availability</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Vehicle_Available</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Vehicles_Asset</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_through_Dealers</targetReference>
+            </connector>
+            <label>Vehicle Available</label>
+        </rules>
+    </decisions>
+    <description>Get Dealers Data Prompt Template Flow</description>
+    <environments>Default</environments>
+    <interviewLabel>Get Dealers {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Get Dealers Data</label>
+    <loops>
+        <name>Loop_through_Dealers</name>
+        <label>Loop through Dealers</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Vehicles_Asset</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Send_Dealers_to_Prompt_Template</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>PromptFlow</processType>
+    <recordLookups>
+        <name>Get_Dealers</name>
+        <label>Get Dealers (Account)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Dealer_Ids</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>BillingPostalCode</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>zipcode</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Vehicles_Asset</name>
+        <label>Get Vehicles (Asset)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Vehicle_Availability</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <elementReference>vehicleModel</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>Get_Dealer_Ids</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Asset</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Dealers</targetReference>
+        </connector>
+        <triggerType>Capability</triggerType>
+    </start>
+    <status>Active</status>
+    <transforms>
+        <name>Get_Dealer_Ids</name>
+        <label>Get Dealer Ids</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Vehicles_Asset</targetReference>
+        </connector>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <scale>0</scale>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <transformValues>
+            <transformValueActions>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Get_Dealers[$EachItem].Id</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
+    <variables>
+        <name>vehicleModel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>zipcode</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

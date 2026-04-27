@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_5</activeVersionIdentifier>
+    <developerName>Dealer_List_Prompt_Template</developerName>
+    <masterLabel>Dealer List Prompt Template</masterLabel>
+    <overridable>false</overridable>
+    <templateVersions>
+        <content>You are agent for Electra Cars. When a customer provides a zip code you job is to display a bulleted list of dealers. 
+
+Below are nearby dealers 
+
+{!$Flow:Get_Dealers_Data.Prompt}
+
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>zipcode</apiName>
+            <definition>primitive://String</definition>
+            <description>zip code for dealer search</description>
+            <masterLabel>zipcode</masterLabel>
+            <referenceName>Input:zipcode</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Get_Dealers_Data</definition>
+            <description>Get Dealers Data Prompt Template Flow</description>
+            <label>Get Dealers Data</label>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>true</isRequired>
+                <parameterName>zipcode</parameterName>
+                <valueExpression>{!$Input:zipcode}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Get_Dealers_Data</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are agent for Electra Cars. Your job is to help customers in booking a test drive.
+
+When customers asks for a test ride, ask following details.
+Vehicle Model
+Preferred Date/Time
+Zip Code
+
+Once above details are provided get the dealers based on the provided Zip code and show a list of dealers as bulleted list
+
+Below are nearby dealers 
+
+{!$Flow:Get_Dealers_Data.Prompt}
+
+If no dealers are found reply saying there that are no dealers in your area right now. We have captured your details and someone will reach you to schedule test drive in nearest area
+
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>zipcode</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>zipcode</masterLabel>
+            <referenceName>Input:zipcode</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Get_Dealers_Data</definition>
+            <description>Get Dealers Data Prompt Template Flow</description>
+            <label>Get Dealers Data</label>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>false</isRequired>
+                <parameterName>zipcode</parameterName>
+                <valueExpression>{!$Input:zipcode}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Get_Dealers_Data</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are agent for Electra Cars. Your job is to help customers in booking a test drive.
+
+When customers asks for a test ride, ask following details.
+Vehicle Model
+Preferred Date/Time
+Zip Code
+
+Once above details are provided get the dealers based on the provided Zip code and show a list of dealers as bulleted list
+
+Below are nearby dealers 
+
+{!$Flow:Get_Dealers_Data.Prompt}
+
+If no dealers are found reply saying there that are no dealers in your area right now. We have captured your details and someone will reach you to schedule test drive in nearest area
+
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>zipcode</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>zipcode</masterLabel>
+            <referenceName>Input:zipcode</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>vehicleName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>vehicleName</masterLabel>
+            <referenceName>Input:vehicleName</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Get_Dealers_Data</definition>
+            <description>Get Dealers Data Prompt Template Flow</description>
+            <label>Get Dealers Data</label>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>false</isRequired>
+                <parameterName>zipcode</parameterName>
+                <valueExpression>{!$Input:zipcode}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Get_Dealers_Data</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are agent for Electra Cars. When a customer provides a zip code &amp; vehicle name you job is to display a bulleted list of dealers. 
+
+Below are nearby dealers 
+
+{!$Flow:Get_Dealers_Data.Prompt}
+
+If no dealers are found reply saying there that are no dealers in your area right now. We have captured your details and someone will reach you to schedule test drive in nearest area
+
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>vehicleName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>vehicleName</masterLabel>
+            <referenceName>Input:vehicleName</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>zipcode</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>zipcode</masterLabel>
+            <referenceName>Input:zipcode</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Get_Dealers_Data</definition>
+            <description>Get Dealers Data Prompt Template Flow</description>
+            <label>Get Dealers Data</label>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>false</isRequired>
+                <parameterName>zipcode</parameterName>
+                <valueExpression>{!$Input:zipcode}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Get_Dealers_Data</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_4</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are agent for Electra Cars. When a customer provides a zip code &amp; vehicle name you job is to display a bulleted list of dealers. 
+
+Below are nearby dealers 
+
+{!$Flow:Get_Dealers_Data.Prompt}
+
+If no dealers are found reply saying there that are no dealers in your area right now. We have captured your details and someone will reach you to schedule test drive in nearest area
+
+</content>
+        <fileDroppingStrategy>{&quot;dropFilesBy&quot;:&quot;LAST_MODIFIED_DATE&quot;,&quot;dropFileStartingWith&quot;:&quot;OLDEST&quot;}</fileDroppingStrategy>
+        <inputs>
+            <apiName>zipcode</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>zipcode</masterLabel>
+            <referenceName>Input:zipcode</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>vehicleName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>vehicleName</masterLabel>
+            <referenceName>Input:vehicleName</referenceName>
+            <required>true</required>
+        </inputs>
+        <isCitationEnabled>false</isCitationEnabled>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>flow://Get_Dealers_Data</definition>
+            <description>Get Dealers Data Prompt Template Flow</description>
+            <label>Get Dealers Data</label>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>false</isRequired>
+                <parameterName>vehicleModel</parameterName>
+                <valueExpression>{!$Input:vehicleName}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>primitive://String</definition>
+                <isRequired>false</isRequired>
+                <parameterName>zipcode</parameterName>
+                <valueExpression>{!$Input:zipcode}</valueExpression>
+            </parameters>
+            <referenceName>Flow:Get_Dealers_Data</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>dQq+D4eNioo5F1XrThHZKLQ1Fg7r5j24YqhyQ4HPU8I=_5</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
